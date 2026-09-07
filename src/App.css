@@ -1,0 +1,1095 @@
+.loan-page {
+  width: min(1520px, calc(100% - 44px));
+  margin: 30px auto 0;
+  padding: 26px 26px 30px;
+  color: #17373b;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(36, 66, 76, 0.12);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.loan-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+  pointer-events: none;
+}
+
+.loan-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.overall-summary {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr 1.2fr 1.2fr;
+  gap: 12px;
+  margin: 0 0 18px;
+}
+
+.overall-summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 76px;
+  justify-content: center;
+  padding: 12px 16px;
+  border: 1px solid rgba(51, 104, 157, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(231, 242, 252, 0.92), rgba(255, 239, 234, 0.9));
+}
+
+.overall-summary span {
+  color: #315674;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.overall-summary strong {
+  color: #173b5d;
+  font-size: 1.35rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0 0 30px;
+  min-height: 120px;
+}
+
+.bank-mark {
+  width: 118px;
+  height: 118px;
+  color: #1a5f63;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(200, 245, 236, 0.9), rgba(218, 233, 255, 0.8));
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 2px 12px rgba(255, 255, 255, 0.7);
+}
+
+.bank-mark svg {
+  width: 78%;
+  height: 78%;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(3rem, 5vw, 6.2rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: #124d4f;
+  font-weight: 800;
+}
+
+.loan-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.loan-selector select {
+  min-width: 220px;
+  height: 42px;
+  border: 1px solid rgba(22, 130, 112, 0.32);
+  border-radius: 12px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #fbfffe, #f3fbf9);
+  color: #114d4e;
+  font: inherit;
+  font-weight: 600;
+}
+
+.loan-selector .add-loan-btn {
+  margin-left: auto;
+}
+
+.delete-loan-btn {
+  height: 42px;
+  border: 1px solid rgba(190, 74, 68, 0.38);
+  border-radius: 12px;
+  padding: 0 16px;
+  background: #fff1ef;
+  color: #b54843;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.delete-loan-btn:hover:not(:disabled) {
+  background: #ffe1dc;
+}
+
+.delete-loan-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(241, 249, 248, 0.9));
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  border-radius: 22px;
+  padding: 18px 18px 10px;
+  box-shadow: 0 14px 28px rgba(36, 66, 76, 0.08);
+}
+
+.panel h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.8rem, 2.3vw, 2.8rem);
+  font-weight: 700;
+  color: #124d4f;
+  line-height: 1.15;
+}
+
+.value-list {
+  border-top: 1px solid rgba(128, 166, 177, 0.18);
+}
+
+.value-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) 1fr;
+  align-items: center;
+  min-height: 72px;
+  border-bottom: 1px solid rgba(128, 166, 177, 0.18);
+  column-gap: 18px;
+}
+
+.field-label {
+  font-size: 1.06rem;
+  letter-spacing: 0.01em;
+  color: #1e5256;
+  font-weight: 700;
+}
+
+.field-value {
+  justify-self: end;
+  font-size: 1.2rem;
+  color: #0d6d4b;
+  font-weight: 700;
+  min-width: 180px;
+  text-align: right;
+}
+
+.field-input {
+  justify-self: end;
+  width: 180px;
+  height: 42px;
+  border: 1px solid rgba(22, 130, 112, 0.32);
+  background: linear-gradient(180deg, #fbfffe, #f3fbf9);
+  color: #114d4e;
+  font-size: 1.08rem;
+  font-weight: 600;
+  text-align: right;
+  padding: 0 12px;
+  box-sizing: border-box;
+  appearance: textfield;
+  -moz-appearance: textfield;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 6px rgba(40, 91, 80, 0.05);
+}
+
+.input-with-suffix {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  border: 1px solid rgba(22, 130, 112, 0.32);
+  background: linear-gradient(180deg, #fbfffe, #f3fbf9);
+  height: 42px;
+  width: 180px;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 6px rgba(40, 91, 80, 0.05);
+}
+
+.input-with-suffix .field-input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  background: transparent;
+  padding: 0 10px;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.input-with-suffix .suffix {
+  margin-right: 12px;
+  font-size: 1.1rem;
+  color: #0d6d4b;
+  font-weight: 700;
+}
+
+.period-inputs {
+  display: flex;
+  justify-self: end;
+  gap: 12px;
+}
+
+.period-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(22, 130, 112, 0.32);
+  background: linear-gradient(180deg, #fbfffe, #f3fbf9);
+  height: 42px;
+  padding: 0 10px;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 6px rgba(40, 91, 80, 0.05);
+}
+
+.period-box .field-input {
+  width: 64px;
+  border: none;
+  padding: 0;
+  text-align: center;
+  background: transparent;
+  box-shadow: none;
+}
+
+.period-label {
+  font-size: 0.9rem;
+  color: #1e5256;
+  font-weight: 700;
+}
+
+.field-input::-webkit-outer-spin-button,
+.field-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.field-input:focus,
+.input-with-suffix:focus-within,
+.period-box:focus-within,
+.custom-lender-input:focus,
+.lender-control select:focus {
+  outline: none;
+  border-color: rgba(18, 120, 101, 0.7);
+  box-shadow: 0 0 0 4px rgba(18, 120, 101, 0.08);
+}
+
+.date-input {
+  text-align: center;
+}
+
+.bottom-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 18px;
+  padding-top: 14px;
+}
+
+.mini-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 52px;
+  gap: 18px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, rgba(235, 249, 245, 0.9), rgba(234, 244, 255, 0.82));
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(42, 80, 87, 0.05);
+}
+
+.lender-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+}
+
+.lender-control select,
+.custom-lender-input,
+.sheet-field input,
+.sheet-field select {
+  height: 42px;
+  border: 1px solid rgba(22, 130, 112, 0.32);
+  background: linear-gradient(180deg, #fbfffe, #f3fbf9);
+  color: #114d4e;
+  font-size: 1rem;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.lender-control select {
+  min-width: 220px;
+}
+
+.custom-lender-input {
+  min-width: 220px;
+}
+
+.right-align {
+  justify-self: stretch;
+}
+
+.strong-label {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #124d4f;
+}
+
+.save-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  min-height: 52px;
+}
+
+.save-loan-btn {
+  border: 1px solid #0d6d4b;
+  border-radius: 12px;
+  padding: 11px 22px;
+  background: linear-gradient(135deg, #0d8060, #149b78);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(13, 109, 75, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.save-loan-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(13, 109, 75, 0.28);
+}
+
+.save-loan-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.save-message {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.save-message.success {
+  color: #0d6d4b;
+}
+
+.save-message.error {
+  color: #b33b3b;
+}
+
+.loan-sheets-section {
+  margin-top: 20px;
+  border-top: 2px solid rgba(128, 166, 177, 0.18);
+  padding-top: 18px;
+}
+
+.loan-sheets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.loan-sheets-header h3 {
+  margin: 0;
+  color: #124d4f;
+  font-size: 1.6rem;
+}
+
+.add-loan-btn,
+.remove-loan-btn {
+  border: 1px solid rgba(18, 120, 101, 0.4);
+  background: linear-gradient(135deg, #eafcf7, #eff7ff);
+  color: #0d6d4b;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 18px rgba(77, 118, 124, 0.08);
+}
+
+.add-loan-btn:hover,
+.remove-loan-btn:hover {
+  transform: translateY(-1px);
+}
+
+.loan-sheet-card {
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  padding: 16px;
+  margin-bottom: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(238, 247, 244, 0.9));
+  border-radius: 18px;
+  box-shadow: 0 10px 20px rgba(42, 80, 87, 0.06);
+}
+
+.sheet-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #124d4f;
+  font-size: 1.08rem;
+}
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.sheet-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #124d4f;
+  font-size: 0.9rem;
+}
+
+.sheet-field label {
+  font-weight: 700;
+}
+
+.sheet-field input,
+.sheet-field select {
+  width: 100%;
+}
+
+.table-wrap {
+  margin-top: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(42, 80, 87, 0.08);
+}
+
+.table-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+/* Premium orange theme */
+.loan-page {
+  color: #3d251c;
+  background: rgba(255, 252, 248, 0.84);
+  border-color: rgba(183, 92, 32, 0.2);
+  box-shadow: 0 24px 60px rgba(111, 57, 24, 0.14);
+}
+
+.bank-mark {
+  color: #a94716;
+  background: linear-gradient(135deg, rgba(255, 218, 177, 0.95), rgba(255, 239, 218, 0.9));
+}
+
+.page-header h1,
+.panel h2,
+.strong-label,
+.loan-sheets-header h3,
+.sheet-title-row {
+  color: #642b1b;
+}
+
+.loan-selector {
+  border-color: rgba(183, 92, 32, 0.2);
+  background: rgba(255, 249, 242, 0.72);
+}
+
+.loan-selector select,
+.field-input,
+.input-with-suffix,
+.period-box,
+.lender-control select,
+.custom-lender-input,
+.sheet-field input,
+.sheet-field select {
+  border-color: rgba(194, 91, 26, 0.32);
+  background: linear-gradient(180deg, #fffdfa, #fff3e8);
+  color: #5d2b1d;
+  box-shadow: inset 0 2px 6px rgba(135, 67, 25, 0.06);
+}
+
+.field-label,
+.period-label,
+.sheet-field {
+  color: #70402b;
+}
+
+.field-value,
+.input-with-suffix .suffix,
+.add-loan-btn,
+.save-message.success {
+  color: #b34f16;
+}
+
+.field-input:focus,
+.input-with-suffix:focus-within,
+.period-box:focus-within,
+.custom-lender-input:focus,
+.lender-control select:focus,
+.loan-selector select:focus {
+  border-color: rgba(202, 86, 18, 0.72);
+  box-shadow: 0 0 0 4px rgba(231, 116, 39, 0.12);
+}
+
+.mini-row {
+  background: linear-gradient(135deg, rgba(255, 238, 218, 0.92), rgba(255, 248, 237, 0.9));
+  border-color: rgba(183, 92, 32, 0.2);
+  box-shadow: 0 8px 18px rgba(126, 67, 31, 0.07);
+}
+
+.save-loan-btn {
+  border-color: #b84e12;
+  background: linear-gradient(135deg, #c95b18, #ed812c);
+  box-shadow: 0 8px 18px rgba(184, 78, 18, 0.22);
+}
+
+.save-loan-btn:hover:not(:disabled) {
+  box-shadow: 0 10px 22px rgba(184, 78, 18, 0.3);
+}
+
+.add-loan-btn,
+.remove-loan-btn {
+  border-color: rgba(194, 91, 26, 0.4);
+  background: linear-gradient(135deg, #fff0dc, #fff8ec);
+  color: #a94716;
+}
+
+.panel,
+.loan-sheet-card {
+  border-color: rgba(183, 92, 32, 0.2);
+  background: linear-gradient(180deg, rgba(255, 254, 252, 0.96), rgba(255, 245, 235, 0.92));
+  box-shadow: 0 14px 28px rgba(111, 57, 24, 0.08);
+}
+
+.table-wrap {
+  border-color: rgba(183, 92, 32, 0.2);
+  background: rgba(255, 252, 248, 0.78);
+  box-shadow: 0 12px 24px rgba(111, 57, 24, 0.1);
+}
+
+thead th {
+  background: linear-gradient(180deg, #fff0dc, #ffe4c5);
+  border-color: rgba(183, 92, 32, 0.2);
+  color: #6b2d19;
+}
+
+tbody td {
+  border-color: rgba(183, 92, 32, 0.14);
+  color: #70402b;
+  background: rgba(255, 254, 252, 0.46);
+}
+
+tbody tr:nth-child(even) td {
+  background: rgba(255, 246, 237, 0.74);
+}
+
+.paid-cell input {
+  accent-color: #d66a20;
+}
+
+tbody tr.payment-paid td {
+  background: rgba(255, 235, 214, 0.76);
+  color: rgba(112, 64, 43, 0.48);
+}
+
+.extra-payment-input {
+  border-color: rgba(194, 91, 26, 0.3);
+  background: rgba(255, 250, 244, 0.94);
+  color: #6a321f;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 1200px;
+}
+
+thead th:first-child,
+tbody td:first-child {
+  width: 62px;
+  text-align: center;
+}
+
+thead th {
+  background: linear-gradient(180deg, #ecfaf7, #e5f0ff);
+  border: 1px solid rgba(128, 166, 177, 0.18);
+  padding: 14px 10px;
+  color: #124d4f;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+}
+
+tbody td {
+  border: 1px solid rgba(128, 166, 177, 0.15);
+  padding: 12px 14px;
+  text-align: right;
+  font-size: 1.02rem;
+  color: #124d4f;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+tbody td:first-child,
+thead th:first-child {
+  text-align: center;
+}
+
+.paid-cell input {
+  width: 18px;
+  height: 18px;
+  accent-color: #0d8060;
+  cursor: pointer;
+}
+
+tbody tr.payment-paid td {
+  background: rgba(220, 248, 237, 0.72);
+  color: rgba(18, 77, 78, 0.5);
+}
+
+tbody tr.payment-paid .extra-payment-input {
+  color: rgba(18, 77, 78, 0.5);
+  opacity: 0.7;
+}
+
+.extra-payment-input {
+  width: 100%;
+  max-width: 118px;
+  height: 36px;
+  border: 1px solid rgba(22, 130, 112, 0.28);
+  border-radius: 9px;
+  padding: 0 8px;
+  background: rgba(251, 255, 254, 0.9);
+  color: #114d4e;
+  font: inherit;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+thead th:nth-child(5),
+tbody td:nth-child(5) {
+  width: 150px;
+}
+
+thead th:nth-child(3),
+tbody td:nth-child(3) {
+  width: 120px;
+  white-space: nowrap;
+}
+
+tbody td:nth-child(5) {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.extra-payment-input:focus {
+  outline: none;
+  border-color: rgba(18, 120, 101, 0.7);
+  box-shadow: 0 0 0 3px rgba(18, 120, 101, 0.08);
+}
+
+.extra-payment-input::-webkit-outer-spin-button,
+.extra-payment-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.extra-payment-input {
+  -moz-appearance: textfield;
+}
+
+tbody tr:nth-child(even) td {
+  background: rgba(244, 250, 249, 0.7);
+}
+
+@media (max-width: 1000px) {
+  .loan-page {
+    width: min(100%, calc(100% - 24px));
+    padding: 18px 16px 22px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .top-grid,
+  .bottom-summary,
+  .overall-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .value-row {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    padding: 12px 0;
+  }
+
+  .field-value,
+  .field-input {
+    justify-self: start;
+    min-width: 0;
+    width: auto;
+    text-align: left;
+  }
+
+  .field-input {
+    width: 100%;
+  }
+
+  .loan-selector {
+    flex-wrap: wrap;
+  }
+
+  .loan-selector select {
+    flex: 1 1 220px;
+    min-width: 0;
+  }
+
+  .loan-selector .add-loan-btn,
+  .loan-selector .delete-loan-btn {
+    margin-left: 0;
+  }
+
+  .lender-control {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .custom-lender-input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .save-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .loan-page {
+    width: calc(100% - 16px);
+    margin-top: 8px;
+    padding: 14px 10px 18px;
+    border-radius: 18px;
+  }
+
+  .page-header {
+    min-height: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .bank-mark {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(2.3rem, 12vw, 3.5rem);
+  }
+
+  .overall-summary {
+    gap: 8px;
+  }
+
+  .overall-summary div {
+    min-height: 62px;
+    padding: 9px 12px;
+  }
+
+  .overall-summary strong {
+    font-size: 1.15rem;
+  }
+
+  .loan-selector {
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .loan-selector .field-label {
+    flex-basis: 100%;
+  }
+
+  .loan-selector select,
+  .loan-selector .add-loan-btn,
+  .loan-selector .delete-loan-btn {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .panel {
+    padding: 14px 12px 8px;
+    border-radius: 16px;
+  }
+
+  .panel h2 {
+    font-size: 1.65rem;
+  }
+
+  .period-inputs {
+    width: 100%;
+  }
+
+  .period-box {
+    flex: 1;
+  }
+
+  .period-box .field-input {
+    width: 100%;
+  }
+
+  .bottom-summary {
+    gap: 10px;
+  }
+
+  .mini-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .save-actions {
+    flex-wrap: wrap;
+  }
+
+  .save-loan-btn {
+    width: 100%;
+  }
+
+  .save-message {
+    width: 100%;
+  }
+
+  .table-wrap {
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 12px;
+  }
+
+  table {
+    min-width: 1160px;
+  }
+}
+
+thead th {
+  background: linear-gradient(180deg, #fff0dc, #ffe4c5);
+  border-color: rgba(183, 92, 32, 0.2);
+  color: #6b2d19;
+}
+
+tbody td {
+  border-color: rgba(183, 92, 32, 0.14);
+  color: #70402b;
+  background: rgba(255, 254, 252, 0.46);
+}
+
+tbody tr:nth-child(even) td {
+  background: rgba(255, 246, 237, 0.74);
+}
+
+.paid-cell input {
+  accent-color: #d66a20;
+}
+
+tbody tr.payment-paid td {
+  background: rgba(255, 235, 214, 0.76);
+  color: rgba(112, 64, 43, 0.48);
+}
+
+tbody tr.payment-paid .extra-payment-input {
+  color: rgba(106, 50, 31, 0.5);
+}
+
+.extra-payment-input {
+  border-color: rgba(194, 91, 26, 0.3);
+  background: rgba(255, 250, 244, 0.94);
+  color: #6a321f;
+}
+
+.extra-payment-input:focus {
+  border-color: rgba(202, 86, 18, 0.72);
+  box-shadow: 0 0 0 3px rgba(231, 116, 39, 0.12);
+}
+
+/* Sapphire and coral theme */
+.loan-page {
+  color: #18324a;
+  background: rgba(255, 255, 255, 0.84);
+  border-color: rgba(51, 104, 157, 0.2);
+  box-shadow: 0 24px 60px rgba(35, 67, 101, 0.14);
+}
+
+.bank-mark {
+  color: #2468a5;
+  background: linear-gradient(135deg, rgba(213, 233, 250, 0.98), rgba(255, 226, 216, 0.9));
+}
+
+.page-header h1,
+.panel h2,
+.strong-label,
+.loan-sheets-header h3,
+.sheet-title-row {
+  color: #173b5d;
+}
+
+.loan-selector {
+  border-color: rgba(51, 104, 157, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.loan-selector select,
+.field-input,
+.input-with-suffix,
+.period-box,
+.lender-control select,
+.custom-lender-input,
+.sheet-field input,
+.sheet-field select {
+  border-color: rgba(51, 116, 174, 0.3);
+  background: linear-gradient(180deg, #ffffff, #f1f7fd);
+  color: #173b5d;
+  box-shadow: inset 0 2px 6px rgba(36, 84, 126, 0.06);
+}
+
+.field-label,
+.period-label,
+.sheet-field {
+  color: #315674;
+}
+
+.field-value,
+.input-with-suffix .suffix,
+.add-loan-btn,
+.save-message.success {
+  color: #d35f4b;
+}
+
+.field-input:focus,
+.input-with-suffix:focus-within,
+.period-box:focus-within,
+.custom-lender-input:focus,
+.lender-control select:focus,
+.loan-selector select:focus {
+  border-color: rgba(42, 111, 176, 0.72);
+  box-shadow: 0 0 0 4px rgba(55, 126, 193, 0.12);
+}
+
+.mini-row {
+  background: linear-gradient(135deg, rgba(231, 242, 252, 0.94), rgba(255, 239, 234, 0.9));
+  border-color: rgba(51, 104, 157, 0.2);
+  box-shadow: 0 8px 18px rgba(35, 67, 101, 0.07);
+}
+
+.save-loan-btn {
+  border-color: #c95845;
+  background: linear-gradient(135deg, #286fae, #df6b55);
+  box-shadow: 0 8px 18px rgba(45, 99, 151, 0.24);
+}
+
+.save-loan-btn:hover:not(:disabled) {
+  box-shadow: 0 10px 22px rgba(45, 99, 151, 0.32);
+}
+
+.add-loan-btn,
+.remove-loan-btn {
+  border-color: rgba(51, 116, 174, 0.36);
+  background: linear-gradient(135deg, #eaf4fd, #fff0eb);
+  color: #28649a;
+}
+
+.panel,
+.loan-sheet-card {
+  border-color: rgba(51, 104, 157, 0.2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(241, 247, 253, 0.93));
+  box-shadow: 0 14px 28px rgba(35, 67, 101, 0.08);
+}
+
+.table-wrap {
+  border-color: rgba(51, 104, 157, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 24px rgba(35, 67, 101, 0.1);
+}
+
+thead th {
+  background: linear-gradient(180deg, #e8f3fd, #dcecf9);
+  border-color: rgba(51, 104, 157, 0.2);
+  color: #214d73;
+}
+
+tbody td {
+  border-color: rgba(51, 104, 157, 0.14);
+  color: #315674;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+tbody tr:nth-child(even) td {
+  background: rgba(242, 248, 253, 0.8);
+}
+
+.paid-cell input {
+  accent-color: #df6b55;
+}
+
+tbody tr.payment-paid td {
+  background: rgba(255, 237, 231, 0.78);
+  color: rgba(49, 86, 116, 0.48);
+  border-top-color: rgba(34, 61, 84, 0.62);
+  border-bottom-color: rgba(34, 61, 84, 0.62);
+}
+
+tbody tr.payment-paid .extra-payment-input {
+  color: rgba(49, 86, 116, 0.5);
+}
+
+.extra-payment-input {
+  border-color: rgba(51, 116, 174, 0.3);
+  background: rgba(249, 252, 255, 0.96);
+  color: #214d73;
+}
+
+.extra-payment-input:focus {
+  border-color: rgba(42, 111, 176, 0.72);
+  box-shadow: 0 0 0 3px rgba(55, 126, 193, 0.12);
+}
+
+.loan-closed-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 52px;
+  padding: 8px 0;
+  color: #d35f4b;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.loan-closed-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #df6b55;
+  cursor: pointer;
+}
+
