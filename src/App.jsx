@@ -20,6 +20,7 @@ const createLoanSheet = (id) => ({
   months: 0,
   startDate: '2026-10-01',
   extraPayments: {},
+  extraCharges: {},
   paidPayments: {},
   loanClosed: false,
 })
@@ -54,9 +55,11 @@ const calculateLoanProgress = (loan) => {
     const paymentNumber = index + 1
     const interest = progress.scheduleBalance * periodicRate
     const extraPayment = Number(loan.extraPayments?.[paymentNumber] || 0)
+    const extraCharge = Number(loan.extraCharges?.[paymentNumber] || 0)
     const regularPayment = paymentNumber === paymentCount ? progress.scheduleBalance + interest : scheduledPayment
-    const totalPayment = Math.min(progress.scheduleBalance + interest, regularPayment + extraPayment)
-    const principalPaid = Math.max(0, totalPayment - interest)
+    const principalPaymentLimit = Math.min(progress.scheduleBalance + interest, regularPayment + extraPayment)
+    const totalPayment = principalPaymentLimit + extraCharge
+    const principalPaid = Math.max(0, principalPaymentLimit - interest)
     const isPaid = Boolean(loan.paidPayments?.[paymentNumber])
     const endingBalance = Math.max(0, progress.scheduleBalance - principalPaid)
 
@@ -118,6 +121,20 @@ function App() {
     }))
   }
 
+  const updateExtraCharge = (id, paymentNumber, value) => {
+    setLoanSheets((prev) => prev.map((sheet) => {
+      if (sheet.id !== id) return sheet
+
+      return {
+        ...sheet,
+        extraCharges: {
+          ...(sheet.extraCharges || {}),
+          [paymentNumber]: value === '' ? '' : Number(value),
+        },
+      }
+    }))
+  }
+
   const updatePaymentPaid = (id, paymentNumber, isPaid) => {
     setLoanSheets((prev) => prev.map((sheet) => {
       if (sheet.id !== id) return sheet
@@ -169,6 +186,8 @@ function App() {
       scheduledPayment: calculation.scheduledPayment,
       totalInterest: calculation.totalInterest,
       amortizationSchedule: calculation.rows,
+      extraCharges: activeLoan.extraCharges || {},
+      extraPayments: activeLoan.extraPayments || {},
       paidPayments: activeLoan.paidPayments || {},
       loanClosed: Boolean(activeLoan.loanClosed),
     }
@@ -209,9 +228,11 @@ function App() {
       const beginningBalance = accumulator.balance
       const interest = beginningBalance * periodicRate
       const extraPayment = Number(activeLoan.extraPayments?.[paymentNumber] || 0)
+      const extraCharge = Number(activeLoan.extraCharges?.[paymentNumber] || 0)
       const regularPayment = paymentNumber === paymentCount ? beginningBalance + interest : scheduledPayment
-      const totalPayment = Math.min(beginningBalance + interest, regularPayment + extraPayment)
-      const principalPaid = Math.max(0, totalPayment - interest)
+      const principalPaymentLimit = Math.min(beginningBalance + interest, regularPayment + extraPayment)
+      const totalPayment = principalPaymentLimit + extraCharge
+      const principalPaid = Math.max(0, principalPaymentLimit - interest)
       const endingBalance = Math.max(0, beginningBalance - principalPaid)
       const cumulativeInterest = accumulator.cumulativeInterest + interest
 
@@ -220,7 +241,8 @@ function App() {
         date: paymentDate,
         beginningBalance: formatCurrency(beginningBalance),
         scheduledPayment: formatCurrency(scheduledPayment),
-        extraPayment: formatCurrency(Math.max(0, totalPayment - regularPayment)),
+        extraPayment: formatCurrency(Math.max(0, principalPaymentLimit - regularPayment)),
+        extraCharge: formatCurrency(extraCharge),
         totalPayment: formatCurrency(totalPayment),
         principal: formatCurrency(principalPaid),
         interest: formatCurrency(interest),
@@ -490,6 +512,7 @@ function App() {
               <th>Beginning<br />balance</th>
               <th>Scheduled<br />payment</th>
               <th>Extra<br />payment</th>
+              <th>GST / other<br />charges</th>
               <th>Total<br />payment</th>
               <th>Principal</th>
               <th>Interest</th>
@@ -521,6 +544,17 @@ function App() {
                     value={activeLoan.extraPayments?.[row.paymentNumber] ?? 0}
                     onChange={(event) => updateExtraPayment(activeLoan.id, row.paymentNumber, event.target.value)}
                     aria-label={`Extra payment for payment ${row.paymentNumber}`}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="extra-payment-input"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={activeLoan.extraCharges?.[row.paymentNumber] ?? 0}
+                    onChange={(event) => updateExtraCharge(activeLoan.id, row.paymentNumber, event.target.value)}
+                    aria-label={`GST or other charges for payment ${row.paymentNumber}`}
                   />
                 </td>
                 <td>{row.totalPayment}</td>
