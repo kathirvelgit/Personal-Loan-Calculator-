@@ -15,6 +15,7 @@ const createLoanSheet = (id) => ({
   id,
   lender: 'My loan',
   amount: '',
+  downPayment: 0,
   rate: 9,
   years: 1,
   months: 0,
@@ -41,7 +42,9 @@ const addMonths = (dateString, monthsToAdd) => {
 }
 
 const calculateLoanProgress = (loan) => {
-  const principal = loan.amount === '' ? 0 : Number(loan.amount || 0)
+  const amount = loan.amount === '' ? 0 : Number(loan.amount || 0)
+  const downPayment = loan.downPayment === '' ? 0 : Number(loan.downPayment || 0)
+  const principal = Math.max(0, amount - downPayment)
   const annualRate = loan.rate === '' ? 0 : Number(loan.rate || 0)
   const years = loan.years === '' ? 0 : Number(loan.years || 0)
   const months = loan.months === '' ? 0 : Number(loan.months || 0)
@@ -99,7 +102,7 @@ function App() {
     setLoanSheets((prev) => prev.map((sheet) => {
       if (sheet.id !== id) return sheet
 
-      if (['amount', 'rate', 'years', 'months'].includes(field)) {
+      if (['amount', 'downPayment', 'rate', 'years', 'months'].includes(field)) {
         return { ...sheet, [field]: value === '' ? '' : Number(value) }
       }
 
@@ -186,6 +189,7 @@ function App() {
       scheduledPayment: calculation.scheduledPayment,
       totalInterest: calculation.totalInterest,
       amortizationSchedule: calculation.rows,
+      downPayment: activeLoan.downPayment || 0,
       extraCharges: activeLoan.extraCharges || {},
       extraPayments: activeLoan.extraPayments || {},
       paidPayments: activeLoan.paidPayments || {},
@@ -210,7 +214,9 @@ function App() {
   }
 
   const calculation = (() => {
-    const principal = activeLoan.amount === '' ? 0 : Number(activeLoan.amount || 0)
+    const amount = activeLoan.amount === '' ? 0 : Number(activeLoan.amount || 0)
+    const downPayment = activeLoan.downPayment === '' ? 0 : Number(activeLoan.downPayment || 0)
+    const principal = Math.max(0, amount - downPayment)
     const annualRate = activeLoan.rate === '' ? 0 : Number(activeLoan.rate || 0)
     const years = activeLoan.years === '' ? 0 : Number(activeLoan.years || 0)
     const months = activeLoan.months === '' ? 0 : Number(activeLoan.months || 0)
@@ -373,6 +379,20 @@ function App() {
                 type="number"
                 value={activeLoan.amount}
                 onChange={(event) => updateLoan(activeLoan.id, 'amount', event.target.value)}
+              />
+            </div>
+
+            <div className="value-row">
+              <label className="field-label" htmlFor="downPayment">Down payment</label>
+              <input
+                id="downPayment"
+                className="field-input"
+                name="downPayment"
+                type="number"
+                min="0"
+                step="0.01"
+                value={activeLoan.downPayment ?? 0}
+                onChange={(event) => updateLoan(activeLoan.id, 'downPayment', event.target.value)}
               />
             </div>
 
